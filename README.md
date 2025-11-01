@@ -1,22 +1,82 @@
-# Brain Tumor Segmentation Using U-Net
+# 🧠 Brain Tumor Segmentation Using U-Net
 
-This repository contains the implementation of a deep learning model using the U-Net architecture for brain tumor segmentation from MRI scans. The project focuses on segmenting tumor regions from multi-class medical images.
+This repository contains the implementation of a deep learning model using the **U-Net** architecture for automated brain tumor segmentation from **MRI scans**. This project aims for precise segmentation of tumor regions to aid in critical tasks like diagnosis and treatment planning.
 
-## Project Overview
+-----
 
-Brain tumor segmentation is a critical task in medical imaging that aids in precise diagnosis and treatment planning. In this project, a U-Net-based model is developed to automate the segmentation of brain tumors from MRI images. The model is trained using Keras and TensorFlow, optimized with binary cross-entropy loss and the Adam optimizer.
+## 💡 Project Overview
 
-## Features
+The core of this project is a **U-Net** model, implemented with **Keras** and **TensorFlow**, specifically tailored for medical image segmentation. It uses data augmentation for robustness and is optimized with **Binary Cross-Entropy Loss** and the **Adam optimizer**.
 
-- **U-Net Architecture**: Designed for medical image segmentation, specifically brain tumor segmentation.
-- **Data Preprocessing**: Handled with Keras ImageDataGenerator, OpenCV, and Numpy to manage multi-class masks.
-- **Optimization**: Binary cross-entropy loss and Adam optimizer for efficient training.
-- **Performance Evaluation**: Measured using Intersection over Union (IoU), dice score, and baseline mask comparisons.
+### Key Features
 
-## Technologies Used
+  * **U-Net Architecture**: Designed for pixel-wise semantic segmentation of medical images.
+  * **Data Augmentation**: Robust training via geometric transformations using `ImageDataGenerator`.
+  * **Optimization**: **Adam** optimizer and **Binary Cross-Entropy** loss.
+  * **Evaluation**: Performance measured using the **Dice Coefficient** (F1-score) against both model predictions and a baseline.
 
-- Python
-- Keras
-- TensorFlow
-- OpenCV
-- Numpy
+-----
+
+## 🛠️ Technologies Used
+
+  * **Python**
+  * **Keras**
+  * **TensorFlow**
+  * **OpenCV**
+  * **Numpy**
+  * **Scikit-image (skimage)**
+
+-----
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Install the necessary libraries:
+
+```bash
+pip install tensorflow keras numpy opencv-python scikit-image matplotlib
+```
+
+### Data Preparation
+
+1.  Structure your training and testing data within the `data/brain/` directory.
+2.  The model expects image and mask folders (e.g., `image` and `label`) for training, and test images, manual masks, and baseline masks for validation.
+
+### Training and Prediction
+
+Execute the main script (`main.py`) to start training and generate predictions:
+
+```bash
+python main.py
+```
+
+This script trains the model for **7 epochs**, saves the best weights to `unet_brain.hdf5`, and generates segmented images in the test directory.
+
+-----
+
+## 📊 Visualization and Results
+
+### Training Convergence
+
+The plots below illustrate the model's convergence over 7 epochs of training. The model shows rapid improvement in both accuracy and loss.
+
+#### Accuracy Plot
+
+![Accuracy Plot](Images/accuracy_plot.png)
+
+#### Loss Plot
+
+![Loss Plot](Images/loss_plot.png)
+
+### 3D Segmentation Result
+
+The model's segmentation output provides a precise mask of the tumor, which can be used for 3D reconstruction and visualization of the affected brain areas.
+
+![3D Segmentation Result](Images/3D.PNG)
+
+### Dice Coefficient Evaluation
+
+The **Dice Coefficient** is the primary evaluation metric, measuring the overlap between the predicted mask and the ground truth. A score closer to **1.0** is ideal. The results below compare the U-Net model's predictions (`Dice_Test`) against a simple baseline approach (`Dice_Baseline`).
+
+![Dice Coefficient Evaluation](Images/dice_coefficient.png)
